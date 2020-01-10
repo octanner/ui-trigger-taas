@@ -30,14 +30,20 @@ app.post('/hook', async (req, res) => {
 
   const hook = req.body;
 
+  if (!hook.repository || !hook.push_data || !hook.push_data.tag) {
+    console.log('ERROR: Invalid hook payload.');
+    res.sendStatus(400);
+    return;
+  }
+
   if (hook.repository.repo_name !==  UI_IMAGE_REPO) {
-    console.log('ERROR: Received hook for repo other than the UI');
+    console.log('INFO: Received valid hook, but repo did not match expected. Ignored webhook.');
     res.sendStatus(200);
     return;
   }
 
   if (!(hook.push_data && hook.push_data.tag && hook.push_data.tag.startsWith(UI_IMAGE_TAG_PREFIX))) {
-    console.log('ERROR: Recieved valid hook, but did not match required image tag format')
+    console.log('INFO: Recieved valid hook, but image tag did not match required prefix. Ignored webhook.')
     res.sendStatus(200);
     return;
   }
