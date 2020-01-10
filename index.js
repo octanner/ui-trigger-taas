@@ -31,7 +31,7 @@ function getTimeTillTrigger() {
   const oneMin = 1000 * 60;
   const fiveMin = oneMin * 5;
   const currentTime = (new Date()).getTime();
-  const nextTime = new Date(Math.ceil((currentTime / fiveMin) * fiveMin) + oneMin).getTime();
+  const nextTime = new Date((Math.ceil((currentTime / fiveMin)) * fiveMin) + oneMin).getTime();
   return nextTime - currentTime;
 }
 
