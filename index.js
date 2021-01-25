@@ -38,7 +38,7 @@ function getTimeTillTrigger() {
 async function triggerBuild(tag, payload) {
   try {
     console.log(`Triggering TaaS test run for image akkeris/ui:${tag} on test ${TAAS_TEST_NAME}...`);
-    await axios.post(`${TAAS_URL}/v1/releasehook`, JSON.stringify(payload), akkeris_auth_config);
+    await axios.post(`${TAAS_URL}/v1/releasedhook`, JSON.stringify(payload), akkeris_auth_config);
     console.log(`Test run triggered successfully!`);
   } catch (err) {
     console.log('ERROR: ', err.message);
